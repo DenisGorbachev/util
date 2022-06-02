@@ -10,7 +10,7 @@
     "lint:markdown:text": "markdownlint --fix --ignore-path .gitignore",
     "lint:markdown:links": "remark --use remark-validate-links --use remark-lint-no-dead-urls --ignore-path .gitignore -q -f",
     "typecheck": "tsc --noEmit",
-    "typecheck:files": "tsc-files --noEmit src/util/*.d.ts",
+    "typecheck:files": "tsc-files --noEmit src/util/src/*.d.ts",
     "test": "jest --setupFiles dotenv/config --all",
     "test:watch": "jest --setupFiles dotenv/config --watchAll --bail",
     "test:nock:off": "set NOCK_OFF=true NOCK_BACK_MODE=wild && yarn test",
