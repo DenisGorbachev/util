@@ -1,5 +1,3 @@
-const { getConfig } = require('./src/dotenv.js')
-
 Error.stackTraceLimit = Infinity
 
 process.on('unhandledRejection', (reason, p) => {
