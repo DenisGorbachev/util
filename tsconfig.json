@@ -14,20 +14,15 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "sourceMap": true,
   },
   "include": [
-    "next-env.d.ts",
-    "src/util/src/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "cli.ts",
-    "styles"
   ],
   "exclude": [
     "node_modules"

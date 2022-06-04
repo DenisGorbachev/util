@@ -12,8 +12,8 @@ const config = merge({}, defaults, tsJestPresets.defaults, {
       //   },
     },
   },
-  globalSetup: './jest.setup.js',
-  setupFilesAfterEnv: ['./jest.setupAfterEnv.js'],
+  globalSetup: './jest.setup.cjs',
+  setupFilesAfterEnv: ['./jest.setupAfterEnv.cjs'],
   // maxWorkers: 1, // Speedup tests: <https://github.com/kulshekhar/ts-jest/issues/259#issuecomment-504088010>
   modulePaths: ['<rootDir>'],
   transformIgnorePatterns: [
