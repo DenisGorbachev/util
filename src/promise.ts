@@ -1,4 +1,4 @@
-import { flatten, identity } from 'lodash'
+import { flatten, identity } from 'lodash-es'
 
 // export async function sequenceOld<Val>(promises: Promise<Val>[]) {
 //   const results: Val[] = []

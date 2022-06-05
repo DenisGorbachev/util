@@ -1,4 +1,4 @@
-import { compact, every, flatten } from 'lodash'
+import { compact, every, flatten } from 'lodash-es'
 
 export async function getTaskFromAggregatedTask(proto, getter, context) {
   const children = await getter(context)

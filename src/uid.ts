@@ -1,7 +1,7 @@
 import { z, ZodObject } from 'zod'
-import { isEqual, pick } from 'lodash'
-import { GetUid } from './zod'
-import { ZodRawShape } from 'zod/lib/types'
+import { isEqual, pick } from 'lodash-es'
+import { GetUid } from './zod.js'
+import { ZodRawShape } from 'zod'
 
 // export function toUid<T>(obj: T, map: Record<keyof T, GetUid<T>>) {
 //   return JSON.stringify()

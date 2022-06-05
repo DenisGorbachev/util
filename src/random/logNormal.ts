@@ -1,7 +1,7 @@
 import { Random } from 'random'
-import { getMean, getStandardDeviation, RandomNumberGenerator } from '../random'
+import { getMean, getStandardDeviation, RandomNumberGenerator } from '../random.js'
 import { BigNumber } from 'bignumber.js'
-import { todo } from '../todo'
+import { todo } from '../todo.js'
 
 export function getLogNormal(sample: number[], random: Random): RandomNumberGenerator {
   const mean = getMean(sample)

@@ -1,4 +1,4 @@
-import BigNumber from 'bignumber.js'
+import { default as BigNumber } from 'bignumber.js'
 
 export const refinePositiveOrZeroBigNumber = (value: BigNumber) => !value /* check for undefined */ || value.isGreaterThanOrEqualTo(0)
 

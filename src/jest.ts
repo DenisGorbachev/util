@@ -1,5 +1,5 @@
 import { ZodSchema } from 'zod'
-import { expect } from './chai'
+import { expect } from './chai.js'
 
 export function testSamples<Obj>(name: string, schema: ZodSchema<Obj>, validSamples: Obj[], invalidSamples: Obj[]) {
   test.each(validSamples)(name + ' valid sample matches schema', async function (sample) {

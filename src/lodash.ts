@@ -1,4 +1,4 @@
-import { difference, isArray, isEqual, mergeWith } from 'lodash'
+import { difference, isArray, isEqual, mergeWith } from 'lodash-es'
 
 export function isEqualBy<T>(a: T, b: T, getter: (t: T) => unknown) {
   return isEqual(getter(a), getter(b))

@@ -1,5 +1,5 @@
 // ValidatorMessage must be the validator itself translated into the language that is understood by the initial executor
-import { impl } from './todo'
+import { impl } from './todo.js'
 
 export type SafeValidatorMessage = unknown
 

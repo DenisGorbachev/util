@@ -1,5 +1,5 @@
-import { getSupabasePrivate, sb } from '../supabase'
-import { Cache } from '../cache'
+import { getSupabasePrivate, sb } from '../supabase.js'
+import { Cache } from '../cache.js'
 
 export async function setData<T>(path: string, data: T) {
   await sb(getSupabasePrivate().storage.from(cacheBucketId).upload(`${cacheFolder}/${path}`, JSON.stringify(data), { upsert: true }))

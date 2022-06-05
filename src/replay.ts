@@ -1,5 +1,5 @@
 import { existsSync } from 'fs'
-import { requireUncached } from './require'
+import { requireUncached } from './require.js'
 
 export const REPLAY_PATH = `${__dirname}/../replay.js`
 

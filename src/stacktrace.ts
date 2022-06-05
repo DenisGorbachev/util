@@ -8,7 +8,7 @@ export function getClearStackFrame(): ClearStackFrame {
   const stacktrace = StackTrace.getSync({ offline: true })
   const $stacktrace = stacktrace.slice(2) // needed because Next.js bundles multiple files into chunks, so filename information is not preserved
   for (const frame of $stacktrace) {
-    // if (frame.fileName && (frame.fileName.endsWith('task.ts') || frame.fileName.endsWith('stacktrace.ts'))) continue
+    // if (frame.fileName && (frame.fileName.endsWith('task') || frame.fileName.endsWith('stacktrace'))) continue
     return {
       functionName: !isGeneric(frame.functionName) ? frame.functionName : undefined,
       lineNumber: frame.lineNumber,

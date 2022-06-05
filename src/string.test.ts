@@ -1,6 +1,6 @@
-import { expect } from './chai'
 import { test } from '@jest/globals'
-import { nail } from './string'
+import { expect } from './chai.js'
+import { nail } from './string.js'
 
 test('nail', async function () {
   expect(nail(`

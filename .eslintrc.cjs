@@ -45,13 +45,12 @@ module.exports = {
       { 'blankLine': 'always', 'prev': '*', 'next': 'export' },
       { 'blankLine': 'always', 'prev': '*', 'next': 'function' },
     ],
-    'import/extensions': 'off',
+    'import/extensions': ['error', 'always'],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
-    'node/file-extension-in-import': 'error'
   },
 }
 

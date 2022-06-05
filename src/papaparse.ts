@@ -1,4 +1,4 @@
-import { camelCase } from 'lodash'
+import { camelCase } from 'lodash-es'
 import { parse as parseOriginal, ParseConfig } from 'papaparse'
 import { strict as assert } from 'assert'
 
