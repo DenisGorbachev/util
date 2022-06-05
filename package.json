@@ -33,7 +33,7 @@
     "coda-js": "^4.0.0",
     "csv": "^6.0.5",
     "csv-stringify": "^6.0.5",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.1",
     "execa": "^5.1.1",
     "google-spreadsheet": "^3.1.15",
     "i18next": "^21.8.5",
@@ -65,10 +65,12 @@
     "@types/chai-subset": "^1.3.3",
     "@types/chai-things": "^0.0.35",
     "@types/compass-vertical-rhythm": "^1.4.2",
+    "@types/dotenv": "^8.2.0",
     "@types/google-spreadsheet": "^3.1.5",
     "@types/gray-percentage": "^2.0.0",
     "@types/jest": "^27.0.0",
     "@types/lodash": "^4.14.170",
+    "@types/lodash-es": "^4.17.6",
     "@types/luxon": "^1.27.0",
     "@types/multicoin-address-validator": "^0.5.0",
     "@types/node": "^15.12.5",
@@ -98,6 +100,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "fast-check": "^2.25.0",
     "jest": "^27.0.6",
+    "jest-config": "^27.0.6",
     "nanoid": "^3.1.20",
     "nock": "^13.1.3",
     "nodemon": "^2.0.6",
@@ -110,5 +113,10 @@
     "tsc-files": "^1.1.3",
     "tsconfig-paths": "^3.12.0",
     "typescript": "^4.3.4"
+  },
+  "dependenciesMeta": {
+    "jest@27.5.1": {
+      "unplugged": true
+    }
   }
 }

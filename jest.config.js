@@ -1,8 +1,10 @@
-const { merge } = require('lodash')
-const { defaults } = require('jest-config')
-const tsJestPresets = require('ts-jest/presets')
+import { merge } from 'lodash-es'
+import { defaults } from 'jest-config'
+import { createJestPreset, TS_EXT_TO_TREAT_AS_ESM } from 'ts-jest'
 
-const config = merge({}, defaults, tsJestPresets.defaultsESM, {
+const preset = createJestPreset(false, { extensionsToTreatAsEsm: TS_EXT_TO_TREAT_AS_ESM })
+
+const config = merge({}, defaults, preset, {
   globals: {
     'ts-jest': {
       useESM: true,
@@ -27,4 +29,4 @@ const config = merge({}, defaults, tsJestPresets.defaultsESM, {
   ],
 })
 
-module.exports = config
+export default config
