@@ -1,5 +1,5 @@
 import { expect } from './chai.js'
-import { test } from '@jest/globals'
+import { test, beforeEach } from '@jest/globals'
 import { Random } from 'random'
 import { getMean, getRandom, getStandardDeviation } from './random.js'
 import { getLogNormalFromParameters } from './random/logNormal.js'

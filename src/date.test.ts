@@ -1,4 +1,4 @@
-import { test } from '@jest/globals'
+import { test, expect } from '@jest/globals'
 import { truncateToDay } from './date.js'
 
 test(truncateToDay.name, () => {
