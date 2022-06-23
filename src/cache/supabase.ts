@@ -1,16 +1,18 @@
-import { getSupabasePrivate, sb } from '../supabase.js'
+import { getSupabasePrivate, isSupabaseError, sb } from '../supabase.js'
 import { Cache } from '../cache.js'
 
 export async function setData<T>(path: string, data: T) {
-  await sb(getSupabasePrivate().storage.from(cacheBucketId).upload(`${cacheFolder}/${path}`, JSON.stringify(data), { upsert: true }))
+  const bucket = getSupabasePrivate().storage.from(cacheBucketId)
+  await sb(bucket.upload(`${cacheFolder}/${path}`, JSON.stringify(data), { upsert: true }))
 }
 
 export async function getData<T>(path: string): Promise<T | undefined> {
   try {
-    const data = await sb(getSupabasePrivate().storage.from(cacheBucketId).download(`${cacheFolder}/${path}`))
+    const bucket = getSupabasePrivate().storage.from(cacheBucketId)
+    const data = await sb(bucket.download(`${cacheFolder}/${path}`))
     return JSON.parse(await data.text())
   } catch (error) {
-    if (error instanceof Error && error.message === 'The resource was not found') {
+    if (isSupabaseError(error) && error.message === 'The resource was not found') {
       return undefined
     } else {
       throw error

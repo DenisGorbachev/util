@@ -27,3 +27,13 @@ export async function sb<T>(supabaseResult: Promise<{ data: T | null; error: Err
   if (data === null) throw new Error('Supabase: data is null') // should never happen according to Supabase function definitions
   return data
 }
+
+export interface SupabaseError {
+  message: string
+  status: number
+}
+
+export function isSupabaseError(error: unknown): error is SupabaseError {
+  const $error = error as SupabaseError
+  return typeof $error === 'object' && typeof $error.message === 'string' && typeof $error.status === 'number'
+}

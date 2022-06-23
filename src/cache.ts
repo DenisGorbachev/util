@@ -9,7 +9,11 @@ export async function fetchCachedData<Data>(cache: Cache, key: string, getData: 
    * Mitigation: refresh the cache after each deploy
    */
   const maybeData = await cache.get(key)
-  return maybeData ? validateData(maybeData as Data /* validation should throw if the type doesn't match */) : await refreshCachedData(cache, key, getData)
+  if (maybeData) {
+    return validateData(maybeData as Data /* validation should throw if the type doesn't match */)
+  } else {
+    return refreshCachedData(cache, key, getData)
+  }
 }
 
 export async function refreshCachedData<Data>(cache: Cache, key: string, getData: (cache: Cache) => Promise<Data>) {
