@@ -1,4 +1,4 @@
-import { todo } from '../../todo.js'
+import { todo } from '../../todo'
 import { constant } from 'fast-check'
 import { Interval } from 'luxon'
 

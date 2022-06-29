@@ -1,5 +1,5 @@
 import { Mutex } from 'async-mutex'
-import { isDefined } from './typescript.js'
+import { isDefined } from './typescript'
 
 export type Getter<Obj> = () => Promise<Obj>
 

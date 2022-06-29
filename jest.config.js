@@ -1,7 +1,5 @@
 import { defaults } from 'jest-config'
 import { merge } from 'lodash-es'
-//
-// const preset = createJestPreset(false, { extensionsToTreatAsEsm: TS_EXT_TO_TREAT_AS_ESM })
 
 const config = merge({}, defaults, {
   moduleNameMapper: {

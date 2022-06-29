@@ -1,6 +1,6 @@
-import { expect } from './chai.js'
+import { expect } from './chai'
 import { test } from '@jest/globals'
-import { getTopLevelDomain } from './url.js'
+import { getTopLevelDomain } from './url'
 
 test('getTopLevelDomain', async function () {
   expect(getTopLevelDomain('sub.sub.example.com')).to.equal('example.com')

@@ -1,5 +1,5 @@
 // allows to implement partial functions & leave a message for another developer
-import { nail } from './string.js'
+import { nail } from './string'
 
 export function todo<V>(value: V, message?: string): V {
   return value

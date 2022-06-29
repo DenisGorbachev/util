@@ -1,6 +1,6 @@
 import { Options, Stringifier, stringify } from 'csv-stringify'
 import { createWriteStream } from 'fs'
-import { pipeline } from './stream.js'
+import { pipeline } from './stream'
 
 export type ToCsvArray<Obj> = (object: Obj) => unknown[]
 

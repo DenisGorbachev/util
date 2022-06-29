@@ -1,8 +1,8 @@
-import { expect } from './chai.js'
+import { expect } from './chai'
 import { test, beforeEach } from '@jest/globals'
 import { Random } from 'random'
-import { getMean, getRandom, getStandardDeviation } from './random.js'
-import { getLogNormalFromParameters } from './random/logNormal.js'
+import { getMean, getRandom, getStandardDeviation } from './random'
+import { getLogNormalFromParameters } from './random/logNormal'
 
 let random: Random
 const minCount = 10000

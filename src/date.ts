@@ -1,4 +1,4 @@
-import { day } from './duration.js'
+import { day } from './duration'
 import { DateTime } from 'luxon'
 
 export type MaybeDate = Date | undefined

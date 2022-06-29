@@ -17,7 +17,7 @@
     "test:watch": "yarn test --watchAll --bail",
     "test:nock:off": "set NOCK_OFF=true NOCK_BACK_MODE=wild && yarn test",
     "test:nock:record": "set NOCK_BACK_MODE=record && yarn test",
-    "test:warnings": "yarn node --trace-warnings --experimental-vm-modules $(yarn bin jest) --setupFiles dotenv/config --no-cache",
+    "test:warnings": "yarn node --experimental-vm-modules --trace-warnings $(yarn bin jest) --setupFiles dotenv/config --no-cache",
     "test:warnings:watch": "yarn test:warnings --watchAll --bail",
     "postinstall": "lefthook install"
   },
@@ -34,6 +34,7 @@
     "csv": "^6.0.5",
     "csv-stringify": "^6.0.5",
     "dotenv": "^16.0.1",
+    "encoding": "^0.1.13",
     "execa": "^5.1.1",
     "google-spreadsheet": "^3.1.15",
     "i18next": "^21.8.5",

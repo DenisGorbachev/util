@@ -1,8 +1,8 @@
 import { RefinementCtx, ZodError, ZodIssueCode, ZodSchema, ZodType, SafeParseReturnType, ZodTypeDef } from 'zod'
-import { isEqualBy } from './lodash.js'
+import { isEqualBy } from './lodash'
 import { difference, isEqual } from 'lodash-es'
-import { byUid, Uid } from './uid.js'
-import { ensure, err } from './ensure.js'
+import { byUid, Uid } from './uid'
+import { ensure, err } from './ensure'
 
 export interface ZodFlatError {
   formErrors: string[];

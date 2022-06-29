@@ -1,5 +1,5 @@
 import { ZodSchema } from 'zod'
-import { expect } from './chai.js'
+import { expect } from './chai'
 import { test } from '@jest/globals'
 
 export function testSamples<Obj>(name: string, schema: ZodSchema<Obj>, validSamples: Obj[], invalidSamples: Obj[]) {

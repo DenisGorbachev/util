@@ -1,6 +1,6 @@
 import { test } from '@jest/globals'
-import { expect } from './chai.js'
-import { roundDownBy } from './number.js'
+import { expect } from './chai'
+import { roundDownBy } from './number'
 
 test(roundDownBy.name, async function () {
   expect(roundDownBy(9, 3)).to.equal(9)

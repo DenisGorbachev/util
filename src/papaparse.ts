@@ -1,6 +1,8 @@
 import { camelCase } from 'lodash-es'
-import { parse as parseOriginal, ParseConfig } from 'papaparse'
+import papaparse, { ParseConfig } from 'papaparse'
 import { strict as assert } from 'assert'
+
+const { parse: parseOriginal } = papaparse
 
 export async function parse<T = unknown>(contents: string, config: ParseConfig<T> = {}) {
   const result = await parseOriginal<T>(contents.trim(), {
