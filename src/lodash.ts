@@ -1,4 +1,5 @@
 import { difference, isArray, isEqual, mergeWith } from 'lodash-es'
+import { GetUid } from './zod'
 
 export function isEqualBy<T>(a: T, b: T, getter: (t: T) => unknown) {
   return isEqual(getter(a), getter(b))
@@ -14,4 +15,8 @@ export function mergeWithArrays<TObject, TSource1, TSource2>(object: TObject, so
       return b.concat(a)
     }
   })
+}
+
+export const notInBy = <Elem, Uid>(getUid: GetUid<Elem>) => (elements: Elem[]) => (element: Elem) => {
+  return !elements.find(el => isEqualBy(el, element, getUid))
 }
