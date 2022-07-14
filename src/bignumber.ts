@@ -32,3 +32,8 @@ export function toBigNumber(value: unknown) {
     throw new Error(`Can't convert value "${value}" to BigNumber`)
   }
 }
+
+export function minimax(num: BigNumber, min: BigNumber, max: BigNumber) {
+  if (!min.lte(max)) throw new Error('min must be less than or equal than max')
+  return BigNumber.maximum(min, BigNumber.minimum(max, num))
+}

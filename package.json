@@ -22,7 +22,7 @@
     "postinstall": "lefthook install"
   },
   "engines": {
-    "node": "^14.17.0"
+    "node": "^16.16.0"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.3",

@@ -1,9 +1,13 @@
 import { day } from './duration'
 import { DateTime } from 'luxon'
+// import './luxon-business-days'
+// import { DateTime as DateTimeBusiness } from 'luxon-business-days'
 
 export type MaybeDate = Date | undefined
 
 export type DateLike = Date | string | number
+
+export interface WithDate { date: Date }
 
 export const MAX_DATE = new Date(8640000000000000)
 
@@ -35,3 +39,7 @@ export function timeBetween(fromHour: number, toHour: number, date: Date) {
 export function truncateToDay(date: Date) {
   return DateTime.fromJSDate(date, { zone: 'UTC' }).startOf('day').toJSDate()
 }
+
+// export function addBusiness(date: Date, duration: Duration) {
+//   return DateTimeBusiness.fromJSDate(date).plusBusiness(duration).toJSDate()
+// }
