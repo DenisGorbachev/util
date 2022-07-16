@@ -41,4 +41,8 @@ export function ensureFind<Obj, Err>(collection: Obj[], filter: Filter<Obj>, err
   }
 }
 
+export function ensureMapGet<Key, Value>(map: Map<Key, Value>, key: Key) {
+  return ensure(map.get(key), err(`Can't find key "${key}" in map ${map}`))
+}
+
 export const tb = (err: Error) => async () => err
