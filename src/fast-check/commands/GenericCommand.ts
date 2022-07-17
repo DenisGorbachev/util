@@ -1,6 +1,7 @@
 import { AsyncCommand } from 'fast-check'
 import { ImplementationError } from '../../todo'
 import { expect } from '../../chai'
+import { stringify } from '../../JSON'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export abstract class GenericCommand<Model extends object, Real, Result> implements AsyncCommand<Model, Real, true> {
@@ -36,7 +37,7 @@ export abstract class GenericCommand<Model extends object, Real, Result> impleme
   abstract runReal(real: Real): Promise<Result>
 
   toString(): string {
-    return `${this.constructor.name} ${JSON.stringify(this, undefined, 2)}`
+    return `${this.constructor.name} ${(stringify(this))}`
   }
 
 }
