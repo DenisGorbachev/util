@@ -5,7 +5,7 @@ export function isEqualBy<T>(a: T, b: T, getter: (t: T) => unknown) {
   return isEqual(getter(a), getter(b))
 }
 
-export function isSubset<T>(set: T[], subset: T[]) {
+export function isSubsetOf<T>(set: T[], subset: T[]) {
   return difference(set, subset).length === 0
 }
 

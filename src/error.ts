@@ -1,4 +1,4 @@
-import { stringify, stringifyError } from './JSON'
+import { stringify } from './JSON'
 
 export class CustomError extends Error {
   public props: object;
@@ -14,17 +14,11 @@ export class CustomError extends Error {
     // this._props = props
   }
 
-  toJSON() {
-    return stringifyError(this)
-  }
-
   toJSONProps() {
     return stringify(this.props)
   }
 
-  toString() {
-    return this.toJSON()
-  }
+  // NOTE: Don't redefine toJSON() as `return stringifyError(this)`, because this leads to infinite recursion
 }
 
 export class CompositeError extends Error {
@@ -39,11 +33,10 @@ export class InfoError<T> extends Error {
   }
 }
 
-export interface ErrorLike {
-  message: string
+export interface WithStack {
   stack: string
 }
 
-export function isErrorLike(obj: object): obj is ErrorLike {
-  return Object.hasOwn(obj, 'message') && Object.hasOwn(obj, 'stack')
+export function hasStack(obj: object): obj is WithStack {
+  return Object.hasOwn(obj, 'stack')
 }
