@@ -1,9 +1,9 @@
 import { expect } from './chai'
 import { test } from '@jest/globals'
-import { getTopLevelDomain } from './url'
+import { getTopLevelDomainFromHostname } from './url'
 
 test('getTopLevelDomain', async function () {
-  expect(getTopLevelDomain('sub.sub.example.com')).to.equal('example.com')
-  expect(getTopLevelDomain('sub.example.com')).to.equal('example.com')
-  expect(getTopLevelDomain('example.com')).to.equal('example.com')
+  expect(getTopLevelDomainFromHostname('sub.sub.example.com')).to.equal('example.com')
+  expect(getTopLevelDomainFromHostname('sub.example.com')).to.equal('example.com')
+  expect(getTopLevelDomainFromHostname('example.com')).to.equal('example.com')
 })
