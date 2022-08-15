@@ -1,8 +1,10 @@
 import { difference, isArray, isEqual, mergeWith } from 'lodash-es'
 import { GetUid } from './zod'
 
-export function isEqualBy<T>(a: T, b: T, getter: (t: T) => unknown) {
-  return isEqual(getter(a), getter(b))
+export type Mapper<U, V> = (obj: U) => V
+
+export function isEqualBy<U, V>(a: U, b: U, mapper: Mapper<U, V>) {
+  return isEqual(mapper(a), mapper(b))
 }
 
 export function isSubsetOf<T>(set: T[], subset: T[]) {
