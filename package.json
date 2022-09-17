@@ -19,7 +19,7 @@
     "test:nock:record": "set NOCK_BACK_MODE=record && yarn test",
     "test:warnings": "yarn node --experimental-vm-modules --trace-warnings $(yarn bin jest) --setupFiles dotenv/config --no-cache",
     "test:warnings:watch": "yarn test:warnings --watchAll --bail",
-    "postinstall": "lefthook install"
+    "postinstall": "echo 'IMPORTANT: Run `lefthook install` if you intend to develop this package'"
   },
   "engines": {
     "node": "^16.15.0"
