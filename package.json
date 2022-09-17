@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "exports": {
-    "./": "./src/"
-  },
+  "main": "index.ts",
   "scripts": {
     "lint:all": "yarn lint:code:all && yarn lint:markdown:all",
     "lint:code": "eslint --fix --ignore-path .gitignore --max-warnings=0",
