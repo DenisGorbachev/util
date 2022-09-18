@@ -1,13 +1,14 @@
 {
   "name": "zenbox-util",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "type": "module",
   "license": "UNLICENSED",
   "exports": {
     "./*": {
       "import": "./dist/esm/src/*",
       "types": "./dist/esm/src/*"
-    }
+    },
+    "./dotenv.cjs": "./dotenv.cjs"
   },
   "typesVersions": {
     "*": {
@@ -18,7 +19,8 @@
   },
   "types": "dist/esm/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "dotenv.cjs"
   ],
   "scripts": {
     "prepare": "lefthook install",
