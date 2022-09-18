@@ -1,5 +1,5 @@
-import knex_module from 'src/knex'
-import { isDev } from './helpers'
+import knex_module from 'knex'
+import { isDev } from './env.constants.js'
 
 export function createKnex() {
   return knex_module({
