@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "main": "index.ts",
-  "types": "index.d.ts",
+  "main": "./index.ts",
+  "types": "./index.d.ts",
   "scripts": {
     "lint:all": "yarn lint:code:all && yarn lint:markdown:all",
     "lint:code": "eslint --fix --ignore-path .gitignore --max-warnings=0",
