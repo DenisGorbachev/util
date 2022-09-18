@@ -8,6 +8,9 @@ const config = merge({}, defaults, {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
+  testPathIgnorePatterns: [
+    'dist',
+  ],
   extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
   globalSetup: './jest.setup.cjs',
   setupFilesAfterEnv: ['./jest.setupAfterEnv.cjs'],
