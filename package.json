@@ -1,6 +1,6 @@
 {
   "name": "zenbox-util",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "type": "module",
   "license": "UNLICENSED",
   "exports": {
@@ -17,7 +17,7 @@
   "scripts": {
     "prepublishOnly": "yarn build:esm && yarn build:types",
     "build:types": "tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist/types",
-    "build:esm": "tsc --declaration false --module esnext --target es6 --noEmit false --outDir dist/esm",
+    "build:esm": "tsc --module esnext --target es6 --noEmit false --outDir dist/esm",
     "lint:all": "yarn lint:code:all && yarn lint:markdown:all",
     "lint:code": "eslint --fix --ignore-path .gitignore --max-warnings=0",
     "lint:code:all": "yarn lint:code .",
