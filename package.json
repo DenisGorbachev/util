@@ -1,13 +1,13 @@
 {
   "name": "zenbox-util",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "license": "UNLICENSED",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/types/src",
-        "default": "./dist/esm/src"
+        "types": "./dist/types/src/index.d.ts",
+        "default": "./dist/esm/src/index.js"
       }
     }
   },
