@@ -1,6 +1,5 @@
-// NOTE: This works only if imported as reference
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference path="./chai-bignumber.d.ts" />
+// NOTE: use "chai-bn", not "chai-bignumber" (idk why, maybe conflicts with an existing module name)
+import './chai-bn.d.ts'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import chaiThings from 'chai-things'
