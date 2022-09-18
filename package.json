@@ -1,11 +1,14 @@
 {
   "name": "zenbox-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "license": "UNLICENSED",
   "exports": {
     ".": "./dist/esm/src"
   },
+  "files": [
+    "dist"
+  ],
   "main": "./index.ts",
   "scripts": {
     "prepublishOnly": "yarn build:esm && yarn build:types",
