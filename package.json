@@ -1,10 +1,16 @@
 {
   "name": "zenbox-util",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
-  "private": true,
+  "license": "UNLICENSED",
+  "exports": {
+    ".": "./dist/esm/src"
+  },
   "main": "./index.ts",
   "scripts": {
+    "postinstall": "yarn build:esm && yarn build:types",
+    "build:types": "tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist/types",
+    "build:esm": "tsc --declaration false --module esnext --target es6 --noEmit false --outDir dist/esm",
     "lint:all": "yarn lint:code:all && yarn lint:markdown:all",
     "lint:code": "eslint --fix --ignore-path .gitignore --max-warnings=0",
     "lint:code:all": "yarn lint:code .",
@@ -17,8 +23,7 @@
     "test:nock:off": "set NOCK_OFF=true NOCK_BACK_MODE=wild && yarn test",
     "test:nock:record": "set NOCK_BACK_MODE=record && yarn test",
     "test:warnings": "yarn node --experimental-vm-modules --trace-warnings $(yarn bin jest) --setupFiles dotenv/config --no-cache",
-    "test:warnings:watch": "yarn test:warnings --watchAll --bail",
-    "postinstall": "echo 'IMPORTANT: Run `lefthook install` if you intend to develop this package'"
+    "test:warnings:watch": "yarn test:warnings --watchAll --bail"
   },
   "engines": {
     "node": "^16.15.0"

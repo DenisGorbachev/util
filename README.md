@@ -1,1 +1,7 @@
-# Shared utils
+# Zenbox util
+
+## Install
+
+```shell
+lefthook install
+```
