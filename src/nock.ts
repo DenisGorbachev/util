@@ -1,4 +1,3 @@
-import './axios'
 import nock_original, { BackMode } from 'nock'
 import { default as axios } from 'axios'
 // eslint-disable-next-line import/extensions

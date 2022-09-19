@@ -1,5 +1,3 @@
-// NOTE: use "chai-bn", not "chai-bignumber" (idk why, maybe conflicts with an existing module name)
-import './chai-bn.d.ts'
 import chai from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import chaiThings from 'chai-things'
