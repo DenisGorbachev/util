@@ -3,13 +3,12 @@
 set -eux
 
 DIR="$(dirname "$(realpath "$0")")"
-CWD="$DIR/.."
-TARGET="$CWD/dist"
+DIST="$DIR/dist"
 
-rimraf "$TARGET"
+rimraf "$DIST"
 yarn build:esm
 yarn version --patch
-cp $CWD/src/*.d.ts "$TARGET"
-cp "$CWD/dotenv.cjs" "$TARGET"
-cp "$CWD/package.json" "$TARGET"
-yarn publish --non-interactive "$TARGET"
+cp $DIR/src/*.d.ts "$DIST"
+cp "$DIR/dotenv.cjs" "$DIST"
+cp "$DIR/package.json" "$DIST"
+yarn publish --non-interactive "$DIST"

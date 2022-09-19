@@ -1,1 +1,1 @@
-import './src/chai-bn.d.ts'
+import './chai-bn.d.ts'
