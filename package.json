@@ -1,20 +1,13 @@
 {
   "name": "zenbox-util",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "type": "module",
   "license": "UNLICENSED",
-  "main": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
-  "files": [
-    "dist",
-    "dotenv.cjs"
-  ],
   "scripts": {
     "prepare": "lefthook install",
-    "prepublishOnly": "rimraf dist && yarn build:esm && yarn copy:types",
+    "prepublishOnly": "./bin/build.sh",
     "build:types": "tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist/types",
     "build:esm": "tsc --declaration true --module esnext --target es6 --noEmit false --outDir dist/esm",
-    "copy:types": "cp src/*.d.ts dist/esm/src",
     "lint:all": "yarn lint:code:all && yarn lint:markdown:all",
     "lint:code": "eslint --fix --ignore-path .gitignore --max-warnings=0",
     "lint:code:all": "yarn lint:code .",
