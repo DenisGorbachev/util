@@ -1,7 +1,9 @@
 import { TFunction } from 'i18next'
 
-export function withNamespace(t: TFunction, ns: string) {
-  return (key: string) => t(key, { ns })
+export function withNamespace(t: TFunction, ns: string): TFunction {
+  return (key, options?) => {
+    return t(key, { ...(options ?? {}), ns })
+  }
 }
 
 export function withNamespaces(t: TFunction, nses: string[]) {
