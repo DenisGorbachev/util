@@ -1,10 +1,9 @@
 {
   "name": "zenbox-util",
-  "version": "1.2.19",
+  "version": "1.2.20",
   "type": "module",
   "license": "UNLICENSED",
   "scripts": {
-    "prepare": "lefthook install",
     "build:types": "tsc --declaration --emitDeclarationOnly --noEmit false --outDir dist/types",
     "build:esm": "tsc --declaration true --module esnext --target es6 --noEmit false --outDir dist/esm",
     "lint:all": "yarn lint:code:all && yarn lint:markdown:all",
