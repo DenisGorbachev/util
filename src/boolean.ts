@@ -1,7 +1,5 @@
-export function isTrue(value: boolean) {
-  return value === true
-}
+export const isTrue = (value: boolean) => value
 
-export function bool2num(value: boolean) {
-  return value ? 1 : 0
-}
+export const isFalse = (value: boolean) => !value
+
+export const bool2num = (value: unknown) => value ? 1 : 0

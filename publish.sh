@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eux
+set -eu
 
 DIR="$(dirname "$(realpath "$0")")"
 DIST="$DIR/dist"
