@@ -22,3 +22,8 @@ export function mergeWithArrays<TObject, TSource1, TSource2>(object: TObject, so
 export const notInBy = <Elem, Uid>(getUid: GetUid<Elem>) => (elements: Elem[]) => (element: Elem) => {
   return !elements.find(el => isEqualBy(el, element, getUid))
 }
+
+/**
+ * Doesn't allow undefined values
+ */
+export const identityStrict = <T>(value: T) => value
