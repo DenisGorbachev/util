@@ -60,8 +60,8 @@ export function getUniqueCountStats<Obj>(objects: Obj[], getUniqueValue: GetUniq
   }, stats)
 }
 
-export const insert = (name: string) => <Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>) => (getUid: GetUid<Output>) => (defaults: Partial<Input>) => (array: Array<Output>) => (object: Input) => {
-  const $object = schema.parse(merge({}, defaults, object))
+export const insert = (name: string) => <Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>) => (getUid: GetUid<Output>) => (array: Array<Output>) => (object: Input) => {
+  const $object = schema.parse(object)
   const duplicate = array.find(o => isEqualBy(o, $object, getUid))
   if (duplicate) throw new Error(`Duplicate ${name} found: ${JSON.stringify(getUid(duplicate))}`)
   array.push($object)
@@ -73,16 +73,17 @@ export function getGenericInserter<Output, Def extends ZodTypeDef = ZodTypeDef, 
 }
 
 export function getInserter<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(name: string, schema: ZodType<Output, Def, Input>, getUid: GetUid<Output>, array: Array<Output>) {
-  return insert(name)(schema)(getUid)({})(array)
+  return insert(name)(schema)(getUid)(array)
 }
 
 export function getMultiInserter<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(name: string, schema: ZodType<Output, Def, Input>, getUid: GetUid<Output>, array: Array<Output>) {
-  const inserter = insert(name)(schema)(getUid)({})(array)
+  const inserter = insert(name)(schema)(getUid)(array)
   return (objects: Array<Input>) => objects.map(inserter)
 }
 
-export function getInserterWithDefaults<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(name: string, schema: ZodType<Output, Def, Input>, getUid: GetUid<Output>, defaults: Partial<Input>, array: Array<Output>) {
-  return insert(name)(schema)(getUid)(defaults)(array)
+export function getInserterWithDefaults<Output extends object, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(name: string, schema: ZodType<Output, Def, Input>, getUid: GetUid<Output>, array: Array<Output>, defaults: Partial<Input>) {
+  const doInsert = insert(name)(schema)(getUid)(array)
+  return (object: Input) => doInsert(merge({}, defaults, object))
 }
 
 export function getFinder<UidHolder, Output extends UidHolder>(getUid: GetUid<UidHolder>, array: Array<Output>) {
