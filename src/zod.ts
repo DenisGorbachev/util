@@ -2,7 +2,7 @@ import { RefinementCtx, SafeParseReturnType, ZodError, ZodIssueCode, ZodSchema, 
 import { isEqualBy } from './lodash'
 import { difference, isEqual, merge } from 'lodash-es'
 import { byUid, Uid } from './uid'
-import { ensure, err } from './ensure'
+import { ensure } from './ensure'
 
 export interface ZodFlatError {
   formErrors: string[];
@@ -103,7 +103,7 @@ export function parse<Obj, Input = Obj>(schema: ZodSchema<Obj>, input: Input) {
 }
 
 export function getName<T>(schema: ZodSchema<T>) {
-  const description = ensure(schema.description, err(`Cannot get schema name: ${JSON.stringify(schema)}`))
+  const description = ensure(schema.description, new Error(`Cannot get schema name: ${JSON.stringify(schema)}`))
   const [name] = description.split(' ')
   return name
 }
