@@ -1,5 +1,9 @@
 import { isFunction } from 'lodash-es'
 
+/**
+ * @see ErrorBox
+ */
+
 export type Box<Value> = Value | (() => Value)
 
 export type BoxP<Value> = Value | (() => Value) | (() => Promise<Value>)

@@ -1,7 +1,8 @@
 // allows to implement partial functions & leave a message for another developer
 import { nail } from './string'
 
-export function todo<V>(value: V, message?: string): V {
+export function todo<V>(value?: V, message?: string): V {
+  if (!value) throw impl(message)
   return value
 }
 
