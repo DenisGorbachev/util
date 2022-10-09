@@ -6,6 +6,9 @@ export function todo<V>(value?: V, message?: string): V {
   return value
 }
 
+/**
+ * @deprecated use todo()
+ */
 export function stub<V>(message = 'Implement stub'): V {
   throw impl(message)
 }

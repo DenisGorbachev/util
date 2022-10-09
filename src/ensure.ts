@@ -6,7 +6,7 @@ export function ensure<Obj, Err>(object: Obj | null | undefined, error?: Box<Err
   return object
 }
 
-export async function ensureP<Obj, Err>(object: Obj | null | undefined, error: BoxP<Err>) {
+export async function ensureP<Obj, Err>(object: Obj | null | undefined, error?: BoxP<Err>) {
   if (object === null || object === undefined) throw await unboxP(error ?? notFound)
   return object
 }
