@@ -1,25 +1,25 @@
 import { identity } from 'lodash-es'
-import { Box, BoxP, unbox, unboxP } from './box'
+import { Cage, CageP, uncage, uncageP } from './cage'
 
-export function ensure<Obj, Err>(object: Obj | null | undefined, error?: Box<Err>) {
-  if (object === null || object === undefined) throw unbox(error ?? notFound)
+export function ensure<Obj, Err>(object: Obj | null | undefined, error?: Cage<Err>) {
+  if (object === null || object === undefined) throw uncage(error ?? notFound)
   return object
 }
 
-export async function ensureP<Obj, Err>(object: Obj | null | undefined, error?: BoxP<Err>) {
-  if (object === null || object === undefined) throw await unboxP(error ?? notFound)
+export async function ensureP<Obj, Err>(object: Obj | null | undefined, error?: CageP<Err>) {
+  if (object === null || object === undefined) throw await uncageP(error ?? notFound)
   return object
 }
 
-export function ensureFind<Obj, Err>(collection: Obj[], filter: (object: Obj) => boolean, error?: Box<Err>) {
+export function ensureFind<Obj, Err>(collection: Obj[], filter: (object: Obj) => boolean, error?: Cage<Err>) {
   const object = collection.find(filter)
-  if (object === null || object === undefined) throw unbox(error ?? get_notFound(filter))
+  if (object === null || object === undefined) throw uncage(error ?? get_notFound(filter))
   return object
 }
 
-export async function ensureFindP<Obj, Err>(collection: Obj[], filter: (object: Obj) => boolean, error?: BoxP<Err>) {
+export async function ensureFindP<Obj, Err>(collection: Obj[], filter: (object: Obj) => boolean, error?: CageP<Err>) {
   const object = collection.find(filter)
-  if (object === null || object === undefined) throw await unboxP(error ?? get_notFound(filter))
+  if (object === null || object === undefined) throw await uncageP(error ?? get_notFound(filter))
   return object
 }
 
@@ -27,8 +27,8 @@ export function ensureMapGet<Key, Value>(map: Map<Key, Value>, key: Key) {
   return ensure(map.get(key), new Error(`Can't find key "${key}" in map ${map}`))
 }
 
-export function ensureEvery<Obj, Err>(objects: Array<Obj | null | undefined>, error?: BoxP<Err>) {
-  if (!objects.every(identity)) throw unbox(error ?? new Error(`Some objects are falsy: \n\n${JSON.stringify(objects)}`))
+export function ensureEvery<Obj, Err>(objects: Array<Obj | null | undefined>, error?: CageP<Err>) {
+  if (!objects.every(identity)) throw uncage(error ?? new Error(`Some objects are falsy: \n\n${JSON.stringify(objects)}`))
   return objects
 }
 
