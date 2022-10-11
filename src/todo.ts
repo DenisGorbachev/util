@@ -1,8 +1,9 @@
 // allows to implement partial functions & leave a message for another developer
 import { nail } from './string'
+import { Cage, uncage } from './cage'
 
-export function todo<V>(value?: V, message?: string): V {
-  if (!value) throw impl(message)
+export function todo<Val, Err>(value?: Val, error?: Cage<Err>): Val {
+  if (!value) throw uncage(error ?? impl())
   return value
 }
 
