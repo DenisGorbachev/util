@@ -47,6 +47,14 @@ export async function sequentialMapAsyncGen<In, Out, Args extends unknown[]>(val
   return results
 }
 
+export async function parallelMapAsyncGen<In, Out, Args extends unknown[]>(values: AsyncGenerator<In>, mapper: (value: In, ...args: Args) => Promise<Out>, ...args: Args) {
+  const promises: Promise<Out>[] = []
+  for await (const value of values) {
+    promises.push(mapper(value, ...args))
+  }
+  return parallel(promises)
+}
+
 export async function promiseAllMap<In, Out, Args extends unknown[]>(values: In[], mapper: (value: In, ...args: Args) => Promise<Out>, ...args: Args) {
   return Promise.all(values.map(value => mapper(value, ...args)))
 }
