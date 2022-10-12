@@ -3,7 +3,6 @@ import { isEqualBy } from './lodash'
 import { difference, isEqual, merge } from 'lodash-es'
 import { byUid, Uid } from './uid'
 import { ensure } from './ensure'
-import { CompositeError, IndexedError } from './error'
 
 export interface ZodFlatError {
   formErrors: string[];
@@ -91,36 +90,6 @@ export function getFinder<UidHolder, Output extends UidHolder>(getUid: GetUid<Ui
   return function (uidHolder: UidHolder) {
     return array.find(byUid(getUid, uidHolder))
   }
-}
-
-export function parseOneLog<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodSchema<Output, Def, Input>, input: Input) {
-  const result = schema.safeParse(input)
-  if (result.success) {
-    return result.data
-  } else {
-    console.error('input', input)
-    throw result.error
-  }
-}
-
-export function parse<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>, inputs: Input[]) {
-  const results = inputs.map(b => schema.safeParse(b))
-  const { values, errors } = results.reduce<ErrorsValues<Output>>(function ({ errors, values }, result, index) {
-    if (result.success) {
-      const value = result.data
-      return { errors, values: values.concat([value]) }
-    } else {
-      const error = new IndexedError(index, result.error)
-      return { errors: errors.concat([error]), values }
-    }
-  }, { errors: [], values: [] })
-  if (errors.length) throw new CompositeError(errors)
-  return values
-}
-
-interface ErrorsValues<Val> {
-  errors: Error[]
-  values: Val[]
 }
 
 export function getName<T>(schema: ZodSchema<T>) {
