@@ -33,6 +33,12 @@ export class InfoError<T> extends Error {
   }
 }
 
+export class IndexedError<Err extends Error> extends Error {
+  constructor(public index: number, public error: Err) {
+    super(`At index ${index}: ${error.toString()}`)
+  }
+}
+
 export interface WithStack {
   stack: string
 }
