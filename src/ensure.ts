@@ -27,6 +27,10 @@ export function ensureMapGet<Key, Value>(map: Map<Key, Value>, key: Key) {
   return ensure(map.get(key), new Error(`Can't find key "${key}" in map ${map}`))
 }
 
+export function ensureGet<Key extends string | number | symbol, Value>(record: Record<Key, Value>, key: Key) {
+  return ensure(record[key], new Error(`Can't find key "${key.toString()}" in record ${record}`))
+}
+
 export function ensureEvery<Obj, Err>(objects: Array<Obj | null | undefined>, error?: CageP<Err>) {
   if (!objects.every(identity)) throw uncage(error ?? new Error(`Some objects are falsy: \n\n${JSON.stringify(objects)}`))
   return objects
