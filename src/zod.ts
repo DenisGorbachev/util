@@ -61,11 +61,15 @@ export function getUniqueCountStats<Obj>(objects: Obj[], getUniqueValue: GetUniq
 }
 
 export const insert = (name: string) => <Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>) => (getUid: GetUid<Output>) => (array: Array<Output>) => (object: Input) => {
-  const $object = schema.parse(object)
-  const duplicate = array.find(o => isEqualBy(o, $object, getUid))
-  if (duplicate) throw new Error(`Duplicate ${name} found: ${JSON.stringify(getUid(duplicate))}`)
-  array.push($object)
-  return $object
+  try {
+    const $object = schema.parse(object)
+    const duplicate = array.find(o => isEqualBy(o, $object, getUid))
+    if (duplicate) throw new Error(`Duplicate ${name} found: ${JSON.stringify(getUid(duplicate))}`)
+    array.push($object)
+    return $object
+  } catch (error) {
+    throw { object, error }
+  }
 }
 
 export function getGenericInserter<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(name: string, schema: ZodType<Output, Def, Input>, getUid: GetUid<Output>) {
