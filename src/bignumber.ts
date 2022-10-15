@@ -8,7 +8,11 @@ export const zero = new BigNumber(0)
 export const one = new BigNumber(1)
 
 export function sumBigNumbers(array: BigNumber[]) {
-  return array.reduce((acc, bn) => acc.plus(bn), new BigNumber(0))
+  return array.reduce((acc, bn) => acc.plus(bn), zero)
+}
+
+export function multBigNumbers(array: BigNumber[]) {
+  return array.reduce((acc, bn) => acc.multipliedBy(bn), one)
 }
 
 export function num(value: BigNumber.Value) {
