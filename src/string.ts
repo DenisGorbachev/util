@@ -1,4 +1,4 @@
-export interface Stringable {
+export interface WithToString {
   toString: () => string
 }
 
