@@ -1,7 +1,9 @@
 import { Mutex } from 'async-mutex'
 import { isDefined } from './typescript'
 
-export type GetterP< Val> = () => Promise<Val>
+export type Getter<Val> = () => Val
+
+export type GetterP<Val> = () => Promise<Val>
 
 /**
  * Note: this function does not accept any arguments, because otherwise only the first result would be cached; subsequent invocations would return the same result for different arguments
