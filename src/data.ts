@@ -1,12 +1,12 @@
 import { Mutex } from 'async-mutex'
 import { isDefined } from './typescript'
 
-export type GetterP<This, Val> = (this: This) => Promise<Val>
+export type GetterP< Val> = () => Promise<Val>
 
 /**
  * Note: this function does not accept any arguments, because otherwise only the first result would be cached; subsequent invocations would return the same result for different arguments
  */
-export function getExclusiveGetterP<This, Val>(getter: GetterP<This, Val>) {
+export function getExclusiveGetterP<This, Val>(fetcher: (this: This) => Promise<Val>) {
   let value: Val | undefined = undefined
   const mutex = new Mutex()
   return async function (this: This) {
@@ -16,7 +16,7 @@ export function getExclusiveGetterP<This, Val>(getter: GetterP<This, Val>) {
       return value
     } else {
       try {
-        value = await getter.apply(this)
+        value = await fetcher.apply(this)
       } finally {
         // release even if the fetcher throws an error
         release()
