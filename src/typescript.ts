@@ -19,3 +19,5 @@ export function getEnumValues<E extends EnumObject>(enumObject: E): EnumObjectEn
     .filter(key => Number.isNaN(Number(key)))
     .map(key => enumObject[key] as EnumObjectEnum<E>)
 }
+
+export const AlwaysTrueTypeGuard = <Err>(e: Err): e is Err => true

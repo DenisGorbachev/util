@@ -1,4 +1,5 @@
 import { flatten, identity } from 'lodash-es'
+import { AlwaysTrueTypeGuard } from './typescript'
 
 export async function parallelMapEvery<In, Out, Args extends unknown[]>(values: In[], mapper: (value: In, ...args: Args) => Promise<Out>, ...args: Args) {
   const results = await parallelMap(values, mapper, ...args)
@@ -103,7 +104,5 @@ export const rethrowErrors = <Err>(isError: (e: unknown) => e is Err) => <T>(res
     return values
   }
 }
-
-const AlwaysTrueTypeGuard = <Err>(e: Err): e is Err => true
 
 export const rethrowAny = rethrowErrors(AlwaysTrueTypeGuard)
