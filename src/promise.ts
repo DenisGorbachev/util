@@ -1,13 +1,5 @@
 import { flatten, identity } from 'lodash-es'
 
-// export async function sequenceOld<Val>(promises: Promise<Val>[]) {
-//   const results: Val[] = []
-//   for (const promise of promises) {
-//     results.push(await promise)
-//   }
-//   return results
-// }
-
 export async function parallelMapEvery<In, Out, Args extends unknown[]>(values: In[], mapper: (value: In, ...args: Args) => Promise<Out>, ...args: Args) {
   const results = await parallelMap(values, mapper, ...args)
   return results.every(identity)
@@ -84,21 +76,25 @@ export function parallel<A, M>(promises: [Promise<A>, Promise<M>]): Promise<[A, 
 export function parallel<A>(promises: Promise<A>[]): Promise<A[]>;
 
 export function parallel<A>(promises: Promise<A>[]): Promise<A[]> {
-  return Promise.allSettled(promises).then(rethrowAll)
+  return Promise.allSettled(promises).then(rethrowAny)
 }
 
 export async function together<In, Out, Args extends unknown[]>(mappers: Array<(...args: Args) => Promise<Out>>, ...args: Args) {
   return parallel(mappers.map(mapper => mapper(...args)))
 }
 
-export function rethrowAll<T>(results: PromiseSettledResult<T>[]) {
+export const rethrowErrors = <Err>(isError: (e: unknown) => e is Err) => <T>(results: PromiseSettledResult<T>[]) => {
   const reasons = []
   const values = []
   for (const result of results) {
     if (result.status === 'fulfilled') {
       values.push(result.value)
     } else {
-      reasons.push(result.reason)
+      if (isError(result.reason)) {
+        reasons.push(result.reason)
+      } else {
+        throw result.reason
+      }
     }
   }
   if (reasons.length) {
@@ -107,3 +103,7 @@ export function rethrowAll<T>(results: PromiseSettledResult<T>[]) {
     return values
   }
 }
+
+const AlwaysTrueTypeGuard = <Err>(e: Err): e is Err => true
+
+export const rethrowAny = rethrowErrors(AlwaysTrueTypeGuard)
