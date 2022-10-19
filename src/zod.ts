@@ -1,4 +1,4 @@
-import { RefinementCtx, SafeParseReturnType, ZodError, ZodIssueCode, ZodSchema, ZodType, ZodTypeDef } from 'zod'
+import { RefinementCtx, SafeParseReturnType, z, ZodError, ZodIssueCode, ZodSchema, ZodType, ZodTypeDef } from 'zod'
 import { isEqualBy } from './lodash'
 import { difference, isEqual, merge } from 'lodash-es'
 import { byUid, Uid } from './uid'
@@ -29,6 +29,10 @@ export interface Stat {
 }
 
 export type GetUniqueValue<Obj> = (object: Obj) => unknown
+
+export function getArraySchema<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodSchema<Output, Def, Input>, getUniqueValue: GetUniqueValue<Output>) {
+  return z.array(schema).superRefine(getDuplicatesRefinement(ensure(schema.description), getUniqueValue))
+}
 
 export function getDuplicatesRefinement<Obj>(name: string, getUniqueValue: GetUniqueValue<Obj>) {
   return function (objects: Obj[], context: RefinementCtx) {
