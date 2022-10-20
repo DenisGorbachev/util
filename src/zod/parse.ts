@@ -11,7 +11,7 @@ export function parseOneLog<Output, Def extends ZodTypeDef = ZodTypeDef, Input =
   }
 }
 
-export function parse<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>, inputs: Input[]) {
+export function parseMany<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>, inputs: Input[]) {
   const results = inputs.map(b => schema.safeParse(b))
   const initial: ErrorsValues<IndexedError<ZodError>, Output> = { errors: [], values: [] }
   const { values, errors } = results.reduce(function ({ errors, values }, result, index) {

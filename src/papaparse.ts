@@ -4,7 +4,7 @@ import { strict as assert } from 'assert'
 
 const { parse: parseOriginal } = papaparse
 
-export async function parse<T = unknown>(contents: string, config: ParseConfig<T> = {}) {
+export async function parseCSV<T = unknown>(contents: string, config: ParseConfig<T> = {}) {
   const result = await parseOriginal<T>(contents.trim(), {
     header: true,
     transformHeader: camelCase,
