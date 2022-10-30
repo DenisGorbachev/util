@@ -1,8 +1,11 @@
 import { ZodSchema } from 'zod'
-import { expect } from './chai'
+import { expect } from '../chai'
 import { test } from '@jest/globals'
+import { getName } from '../zod'
 
-export function testSamples<Obj>(name: string, schema: ZodSchema<Obj>, validSamples: Obj[], invalidSamples: Obj[]) {
+export function testSamples<Obj>(schema: ZodSchema<Obj>, validSamples: Obj[], invalidSamples: Obj[]) {
+  const name = getName(schema)
+
   test.each(validSamples)(name + ' valid sample matches schema', async function (sample) {
     const result = await schema.safeParseAsync(sample)
     if (result.success === false) console.error(result)

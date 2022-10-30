@@ -9,7 +9,7 @@ const config = merge({}, defaults, {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
   testPathIgnorePatterns: [
-    'dist',
+    '<rootDir>/dist',
   ],
   extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
   globalSetup: './jest.setup.cjs',
