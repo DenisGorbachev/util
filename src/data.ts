@@ -1,5 +1,4 @@
 import { Mutex } from 'async-mutex'
-import { isDefined } from './typescript'
 
 export type Getter<Val> = () => Val
 
@@ -12,38 +11,25 @@ export function getExclusiveGetterP<This, Val>(fetcher: (this: This) => Promise<
   let value: Val | undefined = undefined
   const mutex = new Mutex()
   return async function (this: This) {
-    const release = await mutex.acquire()
-    if (isDefined(value)) {
-      release()
-      return value
-    } else {
-      try {
+    return mutex.runExclusive(async function (this: This) {
+      // console.log(new Date(), 'Acquired for', fetcher.name, 'isDefined', isDefined(value))
+      if (value === undefined) {
         value = await fetcher.apply(this)
-      } finally {
-        // release even if the fetcher throws an error
-        release()
       }
       return value
-    }
+    }.bind(this))
   }
 }
 
-export function getExclusiveGetterPWithThisRedirect<Ctx, Result>(runner: (context: Ctx) => Promise<Result>) {
-  let result: Result | undefined = undefined
+export function getExclusiveGetterPWithThisRedirect<Ctx, Val>(runner: (context: Ctx) => Promise<Val>) {
+  let value: Val | undefined = undefined
   const mutex = new Mutex()
   return async function (this: Ctx) {
-    const release = await mutex.acquire()
-    if (isDefined(result)) {
-      release()
-      return result
-    } else {
-      try {
-        result = await runner(this)
-      } finally {
-        // release even if the fetcher throws an error
-        release()
+    return mutex.runExclusive(async function (this: Ctx) {
+      if (value === undefined) {
+        value = await runner(this)
       }
-      return result
-    }
+      return value
+    }.bind(this))
   }
 }
