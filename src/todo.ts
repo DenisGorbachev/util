@@ -2,7 +2,7 @@
 import { nail } from './string'
 
 export function todo<V>(value?: V, message = 'TODO'): V {
-  if (!value) throw impl(message)
+  if (value === undefined) throw impl(message)
   return value
 }
 
