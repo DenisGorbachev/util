@@ -1,15 +1,15 @@
 import { expect } from './chai'
 import { test } from '@jest/globals'
-import { getTopLevelDomain, getTopLevelDomainFromHostname } from './url'
+import { getBaseDomain, getBaseDomainFromHostname } from './url'
 
-test(getTopLevelDomain.name, async function () {
-  expect(getTopLevelDomain('https://example.com')).to.equal('example.com')
-  expect(getTopLevelDomain('https://www.example.com')).to.equal('example.com')
-  expect(getTopLevelDomain('https://sub.www.example.com')).to.equal('example.com')
+test(getBaseDomain.name, async function () {
+  expect(getBaseDomain('https://example.com')).to.equal('example.com')
+  expect(getBaseDomain('https://www.example.com')).to.equal('example.com')
+  expect(getBaseDomain('https://sub.www.example.com')).to.equal('example.com')
 })
 
-test(getTopLevelDomainFromHostname.name, async function () {
-  expect(getTopLevelDomainFromHostname('example.com')).to.equal('example.com')
-  expect(getTopLevelDomainFromHostname('sub.example.com')).to.equal('example.com')
-  expect(getTopLevelDomainFromHostname('sub.sub.example.com')).to.equal('example.com')
+test(getBaseDomainFromHostname.name, async function () {
+  expect(getBaseDomainFromHostname('example.com')).to.equal('example.com')
+  expect(getBaseDomainFromHostname('sub.example.com')).to.equal('example.com')
+  expect(getBaseDomainFromHostname('sub.sub.example.com')).to.equal('example.com')
 })
