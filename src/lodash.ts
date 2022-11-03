@@ -5,6 +5,8 @@ export type Mapper<U, V> = (obj: U) => V
 
 export type MapperP<U, V> = (obj: U) => Promise<V>
 
+export type IsEqual<U> = (a: U) => (b: U) => boolean
+
 export function isEqualBy<U, V>(a: U, b: U, mapper: Mapper<U, V>) {
   return isEqual(mapper(a), mapper(b))
 }
