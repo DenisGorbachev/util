@@ -14,6 +14,13 @@ export function stringifyError(error: Error) {
   return JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
 }
 
+/**
+ * Useful for avoiding the serialization issues with data types that are not directly serializable (e.g. Date)
+ */
+export function restringify(value: unknown) {
+  return JSON.parse(JSON.stringify(value))
+}
+
 export function toSerializableValue(value?: string) {
   return value ?? null
 }
