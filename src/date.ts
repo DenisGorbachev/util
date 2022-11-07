@@ -47,3 +47,7 @@ export function truncateToDay(date: Date) {
 export function byDate(a: WithDate, b: WithDate) {
   return a.date.getTime() - b.date.getTime()
 }
+
+export function toSeconds(date: Date) {
+  return Math.trunc(date.getTime() / 1000)
+}
