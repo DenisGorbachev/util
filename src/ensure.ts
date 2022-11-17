@@ -23,12 +23,16 @@ export async function ensureFindP<Obj, Err>(collection: Obj[], filter: (object: 
   return object
 }
 
-export function ensureMapGet<Key, Value>(map: Map<Key, Value>, key: Key) {
-  return ensure(map.get(key), new Error(`Can't find key "${key}" in map ${map}`))
+export function ensureMapGet<Key, Value, Err>(map: Map<Key, Value>, key: Key, error?: Cage<Err>) {
+  return ensure(map.get(key), () => uncage(error) ?? getNotFoundInMapByKeyError(map, key))
 }
 
-export function ensureGet<Key extends string | number | symbol, Value>(record: Record<Key, Value>, key: Key) {
-  return ensure(record[key], new Error(`Can't find key "${key.toString()}" in record ${record}`))
+export function ensureGet<Key extends string | number | symbol, Value, Err>(record: Record<Key, Value>, key: Key, error?: Cage<Err>) {
+  return ensure(record[key], () => uncage(error) ?? getNotFoundInRecordByKeyError(record, key))
+}
+
+export function ensureIndex<Value, Err>(array: Value[], index: number, error?: Cage<Err>) {
+  return ensure(array[index], () => uncage(error) ?? getNotFoundInArrayByIndexError(array, index))
 }
 
 export function ensureEvery<Obj, Err>(objects: Array<Obj | null | undefined>, error?: CageP<Err>) {
@@ -39,3 +43,9 @@ export function ensureEvery<Obj, Err>(objects: Array<Obj | null | undefined>, er
 export const getNotFoundError = () => new Error('Can\'t find object in collection')
 
 export const getNotFoundErrorForFilter = <Obj>(filter: (object: Obj) => boolean) => new Error('Can\'t find an object in a collection using filter: ' + filter.toString())
+
+export const getNotFoundInMapByKeyError = <Key, Value>(map: Map<Key, Value>, key: Key) => new Error(`Can't find key "${key}" in map ${map}`)
+
+export const getNotFoundInRecordByKeyError = <Key extends string | number | symbol, Value>(record: Record<Key, Value>, key: Key) => new Error(`Can't find key "${key.toString()}" in record ${record}`)
+
+export const getNotFoundInArrayByIndexError = <Value>(array: Value[], index: number) => new Error(`Can't find index "${index}" in array ${array.join(', ')}`)
