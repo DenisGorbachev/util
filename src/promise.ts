@@ -1,6 +1,10 @@
 import { flatten, identity } from 'lodash-es'
 import { AlwaysTrueTypeGuard } from './typescript'
 
+export async function mapAsync<In, Out, Args extends unknown[]>(values: In[], mapper: (value: In, ...args: Args) => Promise<Out>, ...args: Args) {
+  return Promise.all(values.map(value => mapper(value, ...args)))
+}
+
 export async function parallelMapEvery<In, Out, Args extends unknown[]>(values: In[], mapper: (value: In, ...args: Args) => Promise<Out>, ...args: Args) {
   const results = await parallelMap(values, mapper, ...args)
   return results.every(identity)
@@ -46,10 +50,6 @@ export async function parallelMapAsyncGen<In, Out, Args extends unknown[]>(value
     promises.push(mapper(value, ...args))
   }
   return parallel(promises)
-}
-
-export async function promiseAllMap<In, Out, Args extends unknown[]>(values: In[], mapper: (value: In, ...args: Args) => Promise<Out>, ...args: Args) {
-  return Promise.all(values.map(value => mapper(value, ...args)))
 }
 
 export function parallel<A, M, K, N, P, D, G, C, O, L, Q, R>(promises: [Promise<A>, Promise<M>, Promise<K>, Promise<N>, Promise<P>, Promise<D>, Promise<G>, Promise<C>, Promise<O>, Promise<L>, Promise<Q>, Promise<R>]): Promise<[A, M, K, N, P, D, G, C, O, L, Q, R]>;
