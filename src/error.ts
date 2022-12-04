@@ -28,8 +28,8 @@ export class CompositeError extends Error {
 }
 
 export class WrappedError extends Error {
-  constructor(public message: string, public error: Error) {
-    super(`${message}\n\nWrapped error: ${error}`)
+  constructor(public message: string, props: object, public error: Error) {
+    super(`${message}\n\nProps:${stringify(props)}\n\nWrapped error: ${error}`)
   }
 }
 

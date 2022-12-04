@@ -21,7 +21,7 @@ export function parseJSON(input: string) {
   if (result.success) {
     return result.value
   } else {
-    throw new WrappedError('Could not parse JSON', result.error)
+    throw new WrappedError('Could not parse JSON', { input }, result.error)
   }
 }
 
