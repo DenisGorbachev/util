@@ -1,7 +1,7 @@
 import { ZodError, ZodSchema, ZodType, ZodTypeDef } from 'zod'
 import { CompositeError, IndexedError } from '../error'
 
-export function parseOneLog<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodSchema<Output, Def, Input>, input: Input) {
+export const parseOneLog = <Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodSchema<Output, Def, Input>) => (input: Input) => {
   const result = schema.safeParse(input)
   if (result.success) {
     return result.data
@@ -9,6 +9,18 @@ export function parseOneLog<Output, Def extends ZodTypeDef = ZodTypeDef, Input =
     console.error('input', input)
     throw result.error
   }
+}
+
+export const parseManyLog = <Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodSchema<Output, Def, Input>) => (inputs: Input[]) => {
+  const parse = parseOneLog(schema)
+  return inputs.map((input, index) => {
+    try {
+      return parse(input)
+    } catch (e) {
+      console.error('index', index)
+      throw e
+    }
+  })
 }
 
 export function parseMany<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>, inputs: Input[]) {
