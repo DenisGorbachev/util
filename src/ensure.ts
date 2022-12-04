@@ -1,4 +1,4 @@
-import { identity } from 'lodash-es'
+import { identity, isError } from 'lodash-es'
 import { Cage, CageP, uncage, uncageP } from './cage'
 
 export function ensure<Obj, Err>(object: Obj | null | undefined, error?: Cage<Err>) {
@@ -38,6 +38,14 @@ export function ensureIndex<Value, Err>(array: Value[], index: number, error?: C
 export function ensureEvery<Obj, Err>(objects: Array<Obj | null | undefined>, error?: CageP<Err>) {
   if (!objects.every(identity)) throw uncage(error ?? new Error(`Some objects are falsy: \n\n${JSON.stringify(objects)}`))
   return objects
+}
+
+export function ensureIsError(e: unknown) {
+  if (isError(e)) {
+    return e
+  } else {
+    throw e
+  }
 }
 
 export const getNotFoundError = () => new Error('Can\'t find object in collection')
