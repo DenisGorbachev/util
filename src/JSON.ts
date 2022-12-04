@@ -1,7 +1,7 @@
 import { Result } from './result'
 import { ensureIsError } from './ensure'
 
-export function safeParseJSON<Default>(input: string, $default: Default): Result<unknown, Error> {
+export function safeParseJSON(input: string): Result<unknown, Error> {
   try {
     return {
       success: true,
