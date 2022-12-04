@@ -27,6 +27,12 @@ export class CompositeError extends Error {
   }
 }
 
+export class WrappedError extends Error {
+  constructor(public message: string, public error: Error) {
+    super(`${message}\n\nWrapped error: ${error}`)
+  }
+}
+
 export class InfoError<T> extends Error {
   constructor(public message: string, public info: T, public code: number) {
     super(message)

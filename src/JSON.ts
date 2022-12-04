@@ -1,5 +1,6 @@
 import { Result } from './result'
 import { ensureIsError } from './ensure'
+import { WrappedError } from './error'
 
 export function safeParseJSON(input: string): Result<unknown, Error> {
   try {
@@ -12,6 +13,15 @@ export function safeParseJSON(input: string): Result<unknown, Error> {
       success: false,
       error: ensureIsError(error),
     }
+  }
+}
+
+export function parseJSON(input: string) {
+  const result = safeParseJSON(input)
+  if (result.success) {
+    return result.value
+  } else {
+    throw new WrappedError('Could not parse JSON', result.error)
   }
 }
 
