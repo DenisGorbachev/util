@@ -28,12 +28,18 @@ export class CompositeError extends Error {
 }
 
 export class WrappedError extends Error {
+  /**
+   * All public properties are displayed automatically when the error is stringified
+   */
   constructor(public message: string, props: object, public error: Error) {
-    super(`${message}\n\nProps:${stringify(props)}\n\nWrapped error: ${error}`)
+    super(message)
   }
 }
 
 export class InfoError<T> extends Error {
+  /**
+   * All public properties are displayed automatically when the error is stringified
+   */
   constructor(public message: string, public info: T, public code: number) {
     super(message)
   }
