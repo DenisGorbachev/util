@@ -25,13 +25,13 @@ export const parseManyLog = <Output, Def extends ZodTypeDef = ZodTypeDef, Input 
 
 export function parseMany<Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>, inputs: Input[]) {
   const results = inputs.map(b => schema.safeParse(b))
-  const initial: ErrorsValues<IndexedError<ZodError>, Output> = { errors: [], values: [] }
+  const initial: ErrorsValues<IndexedError<Input, ZodError>, Output> = { errors: [], values: [] }
   const { values, errors } = results.reduce(function ({ errors, values }, result, index) {
     if (result.success) {
       const value = result.data
       return { errors, values: values.concat([value]) }
     } else {
-      const error = new IndexedError(index, result.error)
+      const error = new IndexedError(inputs[index], index, result.error)
       return { errors: errors.concat([error]), values }
     }
   }, initial)

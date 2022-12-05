@@ -38,16 +38,16 @@ export function getDuplicatesRefinement<Obj>(name: string, getUniqueValue: GetUn
   return function (objects: Obj[], context: RefinementCtx) {
     try {
       const stats = getDuplicateStats(objects, getUniqueValue)
-      stats.map(err => context.addIssue({
+      stats.map(stat => context.addIssue({
         code: ZodIssueCode.custom,
-        params: err,
-        message: `Found ${name} duplicates: ${JSON.stringify(err)}`,
+        params: stat,
+        message: `Found ${name} duplicates: ${JSON.stringify(stat)}`,
       }))
     } catch (error) {
       context.addIssue({
         code: ZodIssueCode.custom,
         params: { error },
-        message: 'Error while counting duplicates',
+        message: `Error while counting ${name} duplicates`,
       })
     }
   }

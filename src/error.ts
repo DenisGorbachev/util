@@ -1,4 +1,5 @@
 import { stringify } from './JSON'
+import { getMoniker } from './moniker'
 
 export class CustomError extends Error {
   public props: object;
@@ -23,7 +24,7 @@ export class CustomError extends Error {
 
 export class CompositeError extends Error {
   constructor(public errors: Error[]) {
-    super('Multiple errors occurred: \n\n' + errors.map(e => `- ${e}\n`))
+    super('Multiple errors occurred: \n\n' + errors.map(e => `- ${e}`).join('\n'))
   }
 }
 
@@ -45,9 +46,9 @@ export class InfoError<T> extends Error {
   }
 }
 
-export class IndexedError<Err extends Error> extends Error {
-  constructor(public index: number, public error: Err) {
-    super(`At index ${index}: ${error.toString()}`)
+export class IndexedError<Val, Err extends Error> extends Error {
+  constructor(public value: Val, public index: number, public error: Err) {
+    super(`At index ${index} for ${getMoniker(value)}: ${error.toString()}`)
   }
 }
 
