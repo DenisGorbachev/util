@@ -36,12 +36,20 @@ export function getArraySchema<Output, Def extends ZodTypeDef = ZodTypeDef, Inpu
 
 export function getDuplicatesRefinement<Obj>(name: string, getUniqueValue: GetUniqueValue<Obj>) {
   return function (objects: Obj[], context: RefinementCtx) {
-    const stats = getDuplicateStats(objects, getUniqueValue)
-    stats.map(err => context.addIssue({
-      code: ZodIssueCode.custom,
-      params: err,
-      message: `Found ${name} duplicates: ${JSON.stringify(err)}`,
-    }))
+    try {
+      const stats = getDuplicateStats(objects, getUniqueValue)
+      stats.map(err => context.addIssue({
+        code: ZodIssueCode.custom,
+        params: err,
+        message: `Found ${name} duplicates: ${JSON.stringify(err)}`,
+      }))
+    } catch (error) {
+      context.addIssue({
+        code: ZodIssueCode.custom,
+        params: { error },
+        message: 'Error while counting duplicates',
+      })
+    }
   }
 }
 
