@@ -1,5 +1,5 @@
 import { RefinementCtx, SafeParseReturnType, z, ZodError, ZodIssueCode, ZodSchema, ZodType, ZodTypeDef } from 'zod'
-import { isEqualBy } from './lodash'
+import { isEqualByD } from './lodash'
 import { difference, isEqual, merge } from 'lodash-es'
 import { byUid, Uid } from './uid'
 import { ensure } from './ensure'
@@ -75,7 +75,7 @@ export function getUniqueCountStats<Obj>(objects: Obj[], getUniqueValue: GetUniq
 export const insert = (name: string) => <Output, Def extends ZodTypeDef = ZodTypeDef, Input = Output>(schema: ZodType<Output, Def, Input>) => (getUid: GetUid<Output>) => (array: Array<Output>) => (object: Input) => {
   try {
     const $object = schema.parse(object)
-    const duplicate = array.find(o => isEqualBy(o, $object, getUid))
+    const duplicate = array.find(o => isEqualByD(o, $object, getUid))
     if (duplicate) throw new Error(`Duplicate ${name} found: ${JSON.stringify(getUid(duplicate))}`)
     array.push($object)
     return $object

@@ -7,13 +7,25 @@ export type MapperP<U, V> = (obj: U) => Promise<V>
 
 export type IsEqual<U> = (a: U) => (b: U) => boolean
 
-export const isEqualC = <U>(a: U) => (b: U) => isEqual(a, b)
+/**
+ * DC = Deep Curried
+ */
+export const isEqualDC = <U>(a: U) => (b: U) => isEqual(a, b)
 
+/**
+ * SC = Shallow Curried
+ */
 export const isEqualSC = <U>(a: U) => (b: U) => a === b
 
-export const isEqualBy = <U, V>(a: U, b: U, mapper: Mapper<U, V>) => isEqual(mapper(a), mapper(b))
+/**
+ * D = Deep
+ */
+export const isEqualByD = <U, V>(a: U, b: U, mapper: Mapper<U, V>) => isEqual(mapper(a), mapper(b))
 
-export const isEqualByC = <U, V>(mapper: Mapper<U, V>) => (a: U) => (b: U) => isEqualBy(a, b, mapper)
+/**
+ * DC = Deep Curried
+ */
+export const isEqualByDC = <U, V>(mapper: Mapper<U, V>) => (a: U) => (b: U) => isEqualByD(a, b, mapper)
 
 export function isSubsetOf<T>(set: T[], subset: T[]) {
   return difference(set, subset).length === 0
@@ -28,7 +40,7 @@ export function mergeWithArrays<TObject, TSource1, TSource2>(object: TObject, so
 }
 
 export const notInBy = <Elem, Uid>(getUid: GetUid<Elem>) => (elements: Elem[]) => (element: Elem) => {
-  return !elements.find(el => isEqualBy(el, element, getUid))
+  return !elements.find(el => isEqualByD(el, element, getUid))
 }
 
 /**
