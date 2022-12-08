@@ -1,7 +1,3 @@
-# Zenbox util
+# Zenbox Util
 
-## Install
-
-```shell
-lefthook install
-```
+Deprecated, use <https://github.com/zenbox-org/utils>
