@@ -40,7 +40,7 @@
     "js-base64": "^3.7.2",
     "lodash-es": "^4.17.21",
     "longjohn": "^0.2.12",
-    "luxon": "^1.27.0",
+    "luxon": "^2.5.2",
     "markdownlint-cli": "^0.29.0",
     "papaparse": "^5.3.1",
     "random": "^3.0.6",
